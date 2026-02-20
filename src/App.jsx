@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import SOP from './pages/SOP';
 import Helpline from './pages/Helpline';
+import FarmerSearch from './components/FarmerSearch';
 
 export default function AgriculturalPortal() {
     const location = useLocation();
@@ -24,7 +25,8 @@ export default function AgriculturalPortal() {
                     <Route path="/sop" element={<SOP />} />
                     <Route path="/helpline" element={<Helpline />} />
                     {/* Placeholder for status if needed, or redirect */}
-                    <Route path="/status" element={<div className="p-8 text-center text-gray-600">Application Status Page (Use "Check Application" button in header)</div>} />
+                    {/* <Route path="/status" element={<div className="p-8 text-center text-gray-600">Application Status Page (Use "Check Application" button in header)</div>} /> */}
+                    <Route path="/status" element={<FarmerSearch />} />
                 </Routes>
             </main>
             {isHome && <Footer />}
