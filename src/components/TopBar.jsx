@@ -6,7 +6,7 @@ export default function TopBar() {
     return (
         <>
             {/* Top Bar - "footertop div" */}
-            <div className="w-full bg-[#f8f8f8] py-2 border-b border-gray-200">
+            <div className="w-full bg-[#f8f8f8] py-[7px] border-b border-gray-200">
                 <div className="w-full flex justify-end px-4 md:px-[135px]">
                     <button
                         onClick={() => setIsLoginModalOpen(true)}
