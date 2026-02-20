@@ -47,8 +47,8 @@ export default function Header() {
             </header>
 
             {/* Marquee Banner - Improved text scaling */}
-            <div className="w-full bg-[#0648b3] text-white overflow-hidden py-2 md:py-3">
-                <div className="w-full max-w-[1280px] mx-auto whitespace-nowrap animate-marquee text-center font-medium text-sm sm:text-base md:text-lg tracking-wide px-4">
+            <div className="w-full bg-[#0648b3] text-white overflow-hidden py-2 md:py-3 cursor-default">
+                <div className="w-full whitespace-nowrap animate-marquee text-center font-medium text-sm sm:text-base md:text-lg tracking-wide px-4">
                     <span>Welcome to Agricultural Labour Portal</span>
                 </div>
             </div>
