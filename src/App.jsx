@@ -10,6 +10,9 @@ import SOP from './pages/SOP';
 import Helpline from './pages/Helpline';
 import FarmerSearch from './components/FarmerSearch';
 
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+
 export default function AgriculturalPortal() {
     const location = useLocation();
     const isHome = location.pathname === '/';
