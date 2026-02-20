@@ -12,6 +12,9 @@ import FarmerSearch from './components/FarmerSearch';
 
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Copyright from './pages/Copyright';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 export default function AgriculturalPortal() {
     const location = useLocation();
@@ -31,6 +34,9 @@ export default function AgriculturalPortal() {
                         {/* Placeholder for status if needed, or redirect */}
                         {/* <Route path="/status" element={<div className="p-8 text-center text-gray-600">Application Status Page (Use "Check Application" button in header)</div>} /> */}
                         <Route path="/status" element={<FarmerSearch />} />
+                        <Route path="/copyright" element={<Copyright />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path='*' element={<NotFound />} />
                     </Routes>
                 </main>
                 {isHome && <Footer />}
