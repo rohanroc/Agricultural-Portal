@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function SOP() {
     return (
-        <div className="flex-grow container mx-auto px-4 py-8 relative w-full max-w-[930px]">
+        <div className="flex-grow container mx-auto px-4 py-8 relative w-full max-w-[1280px]">
             <Link
                 to="/"
                 className="mb-6 text-gray-600 hover:text-[#0648b3] flex items-center gap-2 text-sm font-bold bg-white px-4 py-2 rounded shadow-sm w-fit transition"

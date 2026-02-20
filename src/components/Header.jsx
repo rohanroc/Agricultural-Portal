@@ -9,17 +9,17 @@ export default function Header() {
         <>
             {/* Header Top */}
             <header className="w-full bg-white border-b shadow-sm">
-                <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between px-4 py-3">
+                <div className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-3 gap-4 md:gap-0">
                     <div className="flex-shrink-0">
                         <Link to="/">
                             <img src="/image/logo_bsb.png" alt="Govt Logo" className="h-20 w-auto block" />
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center gap-2 whitespace-nowrap cursor-pointer">Check Application <i className="fa fa-search"></i></button>
-                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center gap-2 whitespace-nowrap cursor-pointer">New Application Form <i className="fa fa-download"></i></button>
-                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center gap-2 whitespace-nowrap cursor-pointer">Faq <i className="fa fa-question"></i></button>
+                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer w-full sm:w-auto">Check Application <i className="fa fa-search"></i></button>
+                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer w-full sm:w-auto">New Application Form <i className="fa fa-download"></i></button>
+                        <button className="bg-[#00ACED] text-white text-sm px-4 py-2 rounded shadow-sm hover:bg-[#009bd5] transition font-medium flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer w-full sm:w-auto">Faq <i className="fa fa-question"></i></button>
                     </div>
                 </div>
             </header>
