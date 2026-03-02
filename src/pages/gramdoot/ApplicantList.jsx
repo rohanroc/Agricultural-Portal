@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
+import PortalHeader from '../../components/Header';
+import PortalFooter from '../../components/Footer';
 
 
 const PAGE_SIZE = 20;
@@ -52,14 +54,10 @@ export default function ApplicantList() {
   };
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen flex flex-col bg-white">
       <PortalHeader />
 
       <main className="flex-grow max-w-7xl mx-auto w-full px-3 sm:px-4 md:px-6 py-6 sm:py-8">
-=======
-    <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
->>>>>>> 87bb52badf8bcf5900959d9b737eb87d5c8ecb74
 
         {/* ── Search section ── */}
         <h2 className="text-xs sm:text-sm font-bold text-gray-800 tracking-widest mb-4">
@@ -229,6 +227,9 @@ export default function ApplicantList() {
             </div>
           </div>
         )}
-    </main>
+      </main>
+
+      <PortalFooter />
+    </div>
   );
 } 

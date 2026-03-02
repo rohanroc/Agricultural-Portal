@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '../../context/ApplicantContext';
-import { useAuth } from '../../context/AuthContext';
-
+import PortalHeader from '../../components/Header';
+import PortalFooter from '../../components/Footer';
 
 /* ───────────────── Section Header ───────────────── */
 function Section({ title }) {
@@ -44,7 +44,6 @@ function Row({ children }) {
 export default function ViewApplication() {
   const { id } = useParams();
   const { applicants } = useApplicants();
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   const rec = applicants.find(
@@ -232,6 +231,8 @@ export default function ViewApplication() {
           </div>
         </div>
       </main>
+
+      <PortalFooter />
     </div>
   );
 }
