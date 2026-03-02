@@ -155,7 +155,7 @@ export default function Header() {
         {/* Blue announcement bar */}
         <div className="bg-[#1565c0] h-11 flex items-center justify-center">
           <p className="text-white font-semibold text-sm tracking-wide">
-            Welcome to {ROLE_LABELS[user.role]} Portal � Agricultural Labour Scheme
+            Welcome to {ROLE_LABELS[user.role]} Portal Agricultural Labour Scheme
           </p>
         </div>
       </>
