@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 export default function GramdootDashboard() {
   const { user } = useAuth();
@@ -13,12 +12,17 @@ export default function GramdootDashboard() {
   const total = applicants.filter((a) => a.status !== 'deleted').length;
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex flex-col bg-white">
       <PortalHeader />
 
       <main className="flex-grow max-w-7xl mx-auto w-full px-3 sm:px-4 md:px-6 py-8 sm:py-10">
 
         <h2 className="text-sm sm:text-base font-bold text-gray-800 text-center tracking-widest mb-6">
+=======
+    <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-10">
+        <h2 className="text-base font-bold text-gray-800 text-center tracking-widest mb-6">
+>>>>>>> 87bb52badf8bcf5900959d9b737eb87d5c8ecb74
           DASHBOARD SUMMARY
         </h2>
 
@@ -33,10 +37,14 @@ export default function GramdootDashboard() {
           </span>
 
         </div>
+<<<<<<< HEAD
 
       </main>
 
       <PortalFooter />
     </div>
+=======
+    </main>
+>>>>>>> 87bb52badf8bcf5900959d9b737eb87d5c8ecb74
   );
 }

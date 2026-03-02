@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 export default function RegistrationForm() {
   const { user } = useAuth();
@@ -227,8 +226,6 @@ export default function RegistrationForm() {
           </form>
         </div>
       </main>
-
-      <PortalFooter />
     </div>
   );
 }

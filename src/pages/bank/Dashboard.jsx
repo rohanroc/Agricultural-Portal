@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 export default function BankDashboard() {
   const { user } = useAuth();
@@ -13,9 +12,7 @@ export default function BankDashboard() {
   const list = applicants.filter((a) => a.status === 'sent_to_bank' || a.status === 'processed');
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
+    <>
       <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
         <h2 className="text-base font-bold text-gray-800 text-center tracking-widest mb-6">
           BANK DASHBOARD
@@ -86,8 +83,6 @@ export default function BankDashboard() {
         </div>
       </main>
 
-      <PortalFooter />
-
       {viewRecord && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded shadow-xl w-full max-w-md">
@@ -109,7 +104,7 @@ export default function BankDashboard() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

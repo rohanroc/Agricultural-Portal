@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 export default function SNODashboard() {
   const { user } = useAuth();
@@ -14,10 +13,7 @@ export default function SNODashboard() {
   const list = applicants.filter((a) => a.status === 'approved' || a.status === 'sent_to_bank');
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
+    <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
         <h2 className="text-base font-bold text-gray-800 text-center tracking-widest mb-6">
           SNO DASHBOARD
         </h2>
@@ -92,10 +88,7 @@ export default function SNODashboard() {
             </tbody>
           </table>
         </div>
-      </main>
-
-      <PortalFooter />
-    </div>
+    </main>
   );
 }
 

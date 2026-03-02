@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 const STATUS_BADGE = {
   pending:      'bg-yellow-100 text-yellow-800',
@@ -30,9 +29,7 @@ export default function ADADashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
+    <>
       <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
         <h2 className="text-base font-bold text-gray-800 text-center tracking-widest mb-6">
           ADA DASHBOARD
@@ -114,8 +111,6 @@ export default function ADADashboard() {
         </div>
       </main>
 
-      <PortalFooter />
-
       {/* Delete Confirmation */}
       {confirmDelete && (
         <Modal title="Confirm Delete" onClose={() => setConfirmDelete(null)}>
@@ -137,7 +132,7 @@ export default function ADADashboard() {
           </div>
         </Modal>
       )}
-    </div>
+    </>
   );
 }
 
