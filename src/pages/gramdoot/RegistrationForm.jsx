@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 
 export default function RegistrationForm() {
   const { user } = useAuth();
@@ -60,10 +59,7 @@ export default function RegistrationForm() {
     }`;
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
+    <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
         {/* User info top-right */}
         <div className="flex justify-end text-sm text-gray-700 mb-6 space-y-0.5">
           <div className="text-right">
@@ -172,9 +168,6 @@ export default function RegistrationForm() {
             </div>
           </form>
         </div>
-      </main>
-
-      <PortalFooter />
-    </div>
+    </main>
   );
 }

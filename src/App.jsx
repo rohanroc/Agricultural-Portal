@@ -3,23 +3,24 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ApplicantProvider } from './context/ApplicantContext';
 
-// ── Public portal ─────────────────────────────────────────────────────────────
-import TopBar from './components/TopBar';
-import Header from './components/Header';
-import Footer from './components/Footer';
+//  Shared layout components 
+import TopBar    from './components/TopBar';
+import Header    from './components/Header';
+import Footer    from './components/Footer';
 import SubFooter from './components/SubFooter';
 import Copyright from './pages/Copyright';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
+import Contact   from './pages/Contact';
+import NotFound  from './pages/NotFound';
+
 const Home         = React.lazy(() => import('./pages/Home'));
 const About        = React.lazy(() => import('./pages/About'));
 const SOP          = React.lazy(() => import('./pages/SOP'));
 const Helpline     = React.lazy(() => import('./pages/Helpline'));
 const FarmerSearch = React.lazy(() => import('./components/FarmerSearch'));
 
-// ── Internal portal ───────────────────────────────────────────────────────────
-import Login       from './pages/Login';
+//  Portal pages 
 import PortalRoute from './components/PortalRoute';
+
 const GramdootDashboard    = React.lazy(() => import('./pages/gramdoot/Dashboard'));
 const RegistrationForm     = React.lazy(() => import('./pages/gramdoot/RegistrationForm'));
 const FullRegistrationForm = React.lazy(() => import('./pages/gramdoot/FullRegistrationForm'));
@@ -29,17 +30,21 @@ const ADADashboard         = React.lazy(() => import('./pages/ada/Dashboard'));
 const SNODashboard         = React.lazy(() => import('./pages/sno/Dashboard'));
 const BankDashboard        = React.lazy(() => import('./pages/bank/Dashboard'));
 
-// ── Public layout wrapper ─────────────────────────────────────────────────────
-function PublicLayout({ children }) {
+//  Unified App Layout 
+// wrapMain=true   wraps children in <main> (for public pages without own <main>)
+// wrapMain=false  passes children through directly (portal pages have own <main>)
+function AppLayout({ children, wrapMain = true }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
   return (
     <div className="min-h-screen flex flex-col font-roboto text-[15px] bg-white relative overflow-x-hidden">
       <TopBar />
       <Header />
-      <main className="flex-grow flex flex-col items-center w-full bg-white">
-        {children}
-      </main>
+      {wrapMain ? (
+        <main className="flex-grow flex flex-col items-center w-full bg-white">{children}</main>
+      ) : (
+        children
+      )}
       {isHome && <Footer />}
       <SubFooter />
     </div>
@@ -52,53 +57,51 @@ export default function App() {
       <ApplicantProvider>
         <Suspense fallback={<div className="p-12 text-center text-gray-500">Loading...</div>}>
           <Routes>
-            {/* ── Public pages ── */}
-            <Route path="/"          element={<PublicLayout><Home /></PublicLayout>} />
-            <Route path="/about"     element={<PublicLayout><About /></PublicLayout>} />
-            <Route path="/sop"       element={<PublicLayout><SOP /></PublicLayout>} />
-            <Route path="/helpline"  element={<PublicLayout><Helpline /></PublicLayout>} />
-            <Route path="/status"    element={<PublicLayout><FarmerSearch /></PublicLayout>} />
-            <Route path="/copyright" element={<PublicLayout><Copyright /></PublicLayout>} />
-            <Route path="/contact"   element={<PublicLayout><Contact /></PublicLayout>} />
+            {/*  Public pages  */}
+            <Route path="/"          element={<AppLayout><Home /></AppLayout>} />
+            <Route path="/about"     element={<AppLayout><About /></AppLayout>} />
+            <Route path="/sop"       element={<AppLayout><SOP /></AppLayout>} />
+            <Route path="/helpline"  element={<AppLayout><Helpline /></AppLayout>} />
+            <Route path="/status"    element={<AppLayout><FarmerSearch /></AppLayout>} />
+            <Route path="/copyright" element={<AppLayout><Copyright /></AppLayout>} />
+            <Route path="/contact"   element={<AppLayout><Contact /></AppLayout>} />
 
-            {/* ── Portal login ── */}
-            <Route path="/portal"       element={<Navigate to="/portal/login" replace />} />
-            <Route path="/portal/login" element={<Login />} />
+            {/*  /portal → back to home; login is via TopBar modal only */}
+            <Route path="/portal" element={<Navigate to="/" replace />} />
 
-            {/* ── Gramdoot ── */}
+            {/*  Gramdoot  */}
             <Route path="/portal/dashboard"
-              element={<PortalRoute role="gramdoot"><GramdootDashboard /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="gramdoot"><GramdootDashboard /></PortalRoute></AppLayout>} />
             <Route path="/portal/quick-registration/new"
-              element={<PortalRoute role="gramdoot"><RegistrationForm /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="gramdoot"><RegistrationForm /></PortalRoute></AppLayout>} />
             <Route path="/portal/quick-registration/list"
-              element={<PortalRoute role="gramdoot"><ApplicantList /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="gramdoot"><ApplicantList /></PortalRoute></AppLayout>} />
             <Route path="/portal/registration/:id/edit"
-              element={<PortalRoute role="gramdoot"><FullRegistrationForm /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="gramdoot"><FullRegistrationForm /></PortalRoute></AppLayout>} />
             <Route path="/portal/registration/:id/view"
-              element={<PortalRoute role="gramdoot"><ViewApplication /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="gramdoot"><ViewApplication /></PortalRoute></AppLayout>} />
 
-            {/* ── ADA ── */}
+            {/*  ADA  */}
             <Route path="/portal/ada/dashboard"
-              element={<PortalRoute role="ada"><ADADashboard /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ADADashboard /></PortalRoute></AppLayout>} />
             <Route path="/portal/ada/registration/:id/view"
-              element={<PortalRoute role="ada"><ViewApplication /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ViewApplication /></PortalRoute></AppLayout>} />
 
-            {/* ── SNO ── */}
+            {/*  SNO  */}
             <Route path="/portal/sno/dashboard"
-              element={<PortalRoute role="sno"><SNODashboard /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="sno"><SNODashboard /></PortalRoute></AppLayout>} />
             <Route path="/portal/sno/registration/:id/view"
-              element={<PortalRoute role="sno"><ViewApplication /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="sno"><ViewApplication /></PortalRoute></AppLayout>} />
 
-            {/* ── Bank ── */}
+            {/*  Bank  */}
             <Route path="/portal/bank/dashboard"
-              element={<PortalRoute role="bank"><BankDashboard /></PortalRoute>} />
+              element={<AppLayout wrapMain={false}><PortalRoute role="bank"><BankDashboard /></PortalRoute></AppLayout>} />
 
-            {/* ── 404 ── */}
-            <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
+            {/*  404  */}
+            <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
           </Routes>
         </Suspense>
       </ApplicantProvider>
     </AuthProvider>
   );
 }
-

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+
 import {
   DISTRICTS, BLOCKS_BY_DISTRICT, GRAM_PANCHAYATS_BY_BLOCK,
   MOUZAS_BY_GP, VILLAGES_BY_MOUZA,
@@ -127,14 +126,10 @@ export default function FullRegistrationForm() {
 
   if (!record) {
     return (
-      <div className="min-h-screen flex flex-col bg-white">
-        <PortalHeader />
-        <main className="flex-grow max-w-7xl mx-auto px-4 py-12 text-center text-gray-500">
-          Application not found.{' '}
-          <button onClick={() => navigate(-1)} className="text-[#0891b2] underline">Go back</button>
-        </main>
-        <PortalFooter />
-      </div>
+      <main className="flex-grow max-w-7xl mx-auto px-4 py-12 text-center text-gray-500">
+        Application not found.{' '}
+        <button onClick={() => navigate(-1)} className="text-[#0891b2] underline">Go back</button>
+      </main>
     );
   }
 
@@ -213,10 +208,7 @@ export default function FullRegistrationForm() {
   const blocks  = BLOCKS_BY_DISTRICT[form.district]       || [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
-      <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-6">
+    <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-6">
 
         {submitted && (
           <div className="mb-5 bg-green-50 border border-green-300 text-green-700 px-4 py-3 rounded text-sm flex items-center justify-between">
@@ -488,9 +480,6 @@ export default function FullRegistrationForm() {
             Submit
           </button>
         </div>
-      </main>
-
-      <PortalFooter />
-    </div>
+    </main>
   );
 }

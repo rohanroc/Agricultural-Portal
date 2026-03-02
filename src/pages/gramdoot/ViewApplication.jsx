@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '../../context/ApplicantContext';
-import PortalHeader from '../../components/PortalHeader';
-import PortalFooter from '../../components/PortalFooter';
+import { useAuth } from '../../context/AuthContext';
+
 
 // ─── Section Header (green, with horizontal rule — matches screenshots) ───────
 function Section({ title }) {
@@ -36,6 +36,7 @@ function Row({ children }) {
 export default function ViewApplication() {
   const { id } = useParams();
   const { applicants } = useApplicants();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const rec = applicants.find((a) => String(a.id) === String(id));
@@ -43,22 +44,15 @@ export default function ViewApplication() {
 
   if (!rec) {
     return (
-      <div className="min-h-screen flex flex-col bg-white">
-        <PortalHeader />
-        <main className="flex-grow max-w-7xl mx-auto px-4 py-12 text-center text-gray-500">
-          Application not found.{' '}
-          <button onClick={() => navigate(-1)} className="text-[#0891b2] underline">Go back</button>
-        </main>
-        <PortalFooter />
-      </div>
+      <main className="flex-grow max-w-7xl mx-auto px-4 py-12 text-center text-gray-500">
+        Application not found.{' '}
+        <button onClick={() => navigate(-1)} className="text-[#0891b2] underline">Go back</button>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <PortalHeader />
-
-      <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-6">
+    <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-6">
 
         {/* Back button */}
         <div className="mb-4">
@@ -172,7 +166,7 @@ export default function ViewApplication() {
           >
             Back
           </button>
-          {(rec.status === 'pending' || rec.status === 'rejected') && (
+          {user?.role === 'gramdoot' && (rec.status === 'pending' || rec.status === 'rejected') && (
             <button
               onClick={() => navigate(`/portal/registration/${rec.id}/edit`)}
               className="bg-[#0891b2] hover:bg-[#0e7490] text-white text-sm font-medium px-8 py-2.5 rounded transition-colors"
@@ -183,7 +177,5 @@ export default function ViewApplication() {
         </div>
       </main>
 
-      <PortalFooter />
-    </div>
   );
 }
