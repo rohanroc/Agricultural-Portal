@@ -92,7 +92,7 @@ export default function App() {
               <Route path="/portal/ada/applications"
                 element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ADAApplicantList /></PortalRoute></AppLayout>} />
               <Route path="/portal/ada/approved"
-                element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ADAApprovedApplicantList /></PortalRoute></AppLayout>} />
+                element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ADAApplicantList /></PortalRoute></AppLayout>} />
               <Route path="/portal/ada/send_to_bank"
                 element={<AppLayout wrapMain={false}><PortalRoute role="ada"><ADASentToBankApplicantList /></PortalRoute></AppLayout>} />
               <Route path="/portal/ada/pending"
