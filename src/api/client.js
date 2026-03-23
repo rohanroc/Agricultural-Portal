@@ -152,6 +152,7 @@ function serverStatusToLocal(s) {
  *  - Flat  (GET /api/farmer_lists):  name, farmer_image_url, district_id… at top level
  *  - Nested (POST/PATCH /api/farmers): farmer_profile, farmer_address, farmer_bank objects
  */
+
 export function normalizeFarmer(f) {
   const approvalStatusRaw = f.approval_status ?? f.status ?? f.status_name ?? f.state ?? null;
   const status = serverStatusToLocal(approvalStatusRaw);
