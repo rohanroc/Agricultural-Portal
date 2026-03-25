@@ -1194,6 +1194,10 @@ export default function Header() {
                     <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg">
                       <Link to="/portal/mis/demo1" className="block px-4 py-2">Download Submitted List</Link>
                       <Link to="/portal/mis/demo2" className="block px-4 py-2">Download Approved List</Link>
+                      <Link to="/portal/mis/demo2" className="block px-4 py-2">Download Rejected List</Link>
+                      <Link to="/portal/mis/demo2" className="block px-4 py-2">Download Pending List</Link>
+                      <Link to="/portal/mis/demo2" className="block px-4 py-2">Download Reverted List</Link>
+                      <Link to="/portal/mis/demo2" className="block px-4 py-2">Download Send to Bank List</Link>
                     </div>
                   )}
                 </div>
@@ -1283,6 +1287,10 @@ export default function Header() {
                   <p className="font-semibold">MIS</p>
                   <Link to="/portal/mis/demo1" className="block pl-3 py-1">Download Submitted List</Link>
                   <Link to="/portal/mis/demo2" className="block pl-3 py-1">Download Approved List</Link>
+                  <Link to="/portal/mis/demo2" className="block pl-3 py-1">Download Rejected List</Link>
+                  <Link to="/portal/mis/demo2" className="block pl-3 py-1">Download Pending List</Link>
+                  <Link to="/portal/mis/demo2" className="block pl-3 py-1">Download Reverted List</Link>
+                  <Link to="/portal/mis/demo2" className="block pl-3 py-1">Download Send to Bank List</Link>
                 </div>
 
                 <div>
