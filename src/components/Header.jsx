@@ -1149,7 +1149,7 @@ export default function Header() {
   if (user) {
     return (
       <>
-        <header className="bg-white border-b border-gray-200 shadow-sm">
+        <header className="bg-white border-b border-gray-200 shadow-sm relative z-50">
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-[72px]">
 
             <Link to={dashboardPath}>
@@ -1175,7 +1175,7 @@ export default function Header() {
                       setMisMenuOpen(false);
                       setMemberMenuOpen(false);
                     }}
-                    className="flex gap-1"
+                    className="flex gap-1 hover:cursor-pointer"
                   >
                     Quick Registration
                     <svg
@@ -1190,7 +1190,7 @@ export default function Header() {
                   </button>
 
                   {quickRegOpen && (
-                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg">
+                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg z-50">
                       <Link to="/portal/quick-registration/new" className="block px-4 py-2">
                         Registration Form
                       </Link>
@@ -1227,7 +1227,7 @@ export default function Header() {
                   </button>
 
                   {adaMenuOpen && (
-                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg">
+                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg z-50">
                       <Link to="/portal/ada/applications" className="block px-4 py-2">Applicant List</Link>
                       <Link to="/portal/ada/pending" className="block px-4 py-2">Pending List</Link>
                       <Link to="/portal/ada/approved" className="block px-4 py-2">Approved List</Link>
@@ -1265,7 +1265,7 @@ export default function Header() {
                   </button>
 
                   {misMenuOpen && (
-                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg">
+                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg z-50">
                       <button type="button" onClick={() => handleMisDownload('submitted')} className="block w-full text-left px-4 py-2 hover:bg-gray-50 hover:cursor-pointer">Download Submitted List</button>
                       <button type="button" onClick={() => handleMisDownload('approved')} className="block w-full text-left px-4 py-2 hover:bg-gray-50 hover:cursor-pointer">Download Approved List</button>
                       <button type="button" onClick={() => handleMisDownload('rejected')} className="block w-full text-left px-4 py-2 hover:bg-gray-50 hover:cursor-pointer">Download Rejected List</button>
@@ -1302,7 +1302,7 @@ export default function Header() {
                   </button>
 
                   {memberMenuOpen && (
-                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg">
+                    <div className="absolute mt-2 w-52 bg-white border rounded shadow-lg z-50">
                       <Link to="/portal/ada/members/new" className="block px-4 py-2">New Member</Link>
                       <Link to="/portal/ada/members" className="block px-4 py-2">Member List</Link>
                     </div>
@@ -1314,7 +1314,7 @@ export default function Header() {
 
             {/* Mobile Toggle */}
             <div className="sm:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="hover:cursor-pointer">
                 {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
@@ -1359,12 +1359,12 @@ export default function Header() {
 
                 <div>
                   <p className="font-semibold">MIS</p>
-                  <button type="button" onClick={() => handleMisDownload('submitted')} className="block pl-3 py-1 text-left">Download Submitted List</button>
-                  <button type="button" onClick={() => handleMisDownload('approved')} className="block pl-3 py-1 text-left">Download Approved List</button>
-                  <button type="button" onClick={() => handleMisDownload('rejected')} className="block pl-3 py-1 text-left">Download Rejected List</button>
-                  <button type="button" onClick={() => handleMisDownload('pending')} className="block pl-3 py-1 text-left">Download Pending List</button>
-                  <button type="button" onClick={() => handleMisDownload('reverted')} className="block pl-3 py-1 text-left">Download Reverted List</button>
-                  <button type="button" onClick={() => handleMisDownload('sent_to_bank')} className="block pl-3 py-1 text-left">Download Send to Bank List</button>
+                  <button type="button" onClick={() => handleMisDownload('submitted')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Submitted List</button>
+                  <button type="button" onClick={() => handleMisDownload('approved')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Approved List</button>
+                  <button type="button" onClick={() => handleMisDownload('rejected')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Rejected List</button>
+                  <button type="button" onClick={() => handleMisDownload('pending')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Pending List</button>
+                  <button type="button" onClick={() => handleMisDownload('reverted')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Reverted List</button>
+                  <button type="button" onClick={() => handleMisDownload('sent_to_bank')} className="block pl-3 py-1 text-left hover:cursor-pointer">Download Send to Bank List</button>
                 </div>
 
                 <div>
@@ -1387,7 +1387,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-sm relative z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
           <Link to="/">
             <img src="/image/logo_bsb.png" alt="Govt Logo" className="h-16 w-auto" />
@@ -1395,12 +1395,12 @@ export default function Header() {
 
           <div className="hidden sm:flex gap-2">
             <Link to="/status" className="bg-[#00ACED] text-white px-4 py-2 rounded">Check Application</Link>
-            <button className="bg-[#00ACED] text-white px-4 py-2 rounded">New Application Form</button>
-            <button className="bg-[#00ACED] text-white px-4 py-2 rounded">Faq</button>
+            <button className="bg-[#00ACED] text-white px-4 py-2 rounded hover:cursor-pointer">New Application Form</button>
+            <button className="bg-[#00ACED] text-white px-4 py-2 rounded hover:cursor-pointer">Faq</button>
           </div>
 
           <div className="sm:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="hover:cursor-pointer">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
@@ -1409,8 +1409,8 @@ export default function Header() {
         {isMenuOpen && (
           <div className="sm:hidden px-4 pb-4 flex flex-col gap-2 bg-white border-t">
             <Link to="/status" className="bg-[#00ACED] text-center text-white px-4 py-2 rounded">Check Application</Link>
-            <button className="bg-[#00ACED] text-center text-white px-4 py-2 rounded">New Application Form</button>
-            <button className="bg-[#00ACED] text-center text-white px-4 py-2 rounded">Faq</button>
+            <button className="bg-[#00ACED] text-center text-white px-4 py-2 rounded hover:cursor-pointer">New Application Form</button>
+            <button className="bg-[#00ACED] text-center text-white px-4 py-2 rounded hover:cursor-pointer">Faq</button>
           </div>
         )}
       </header>
