@@ -467,9 +467,9 @@ export async function listFarmers() {
   return extractCollection(data, ['farmer_lists', 'farmers', 'items', 'records']);
 }
 
-export async function listADAPendings() {
-  const data = await apiGet('/v1/ada_pendings', { auth: true });
-  return extractCollection(data, [
+export async function listADAPendings(page = 1) {
+  const data = await apiGet(`/v1/ada_pendings?page=${page}`, { auth: true });
+  const items = extractCollection(data, [
     'ada_pendings',
     'pending_lists',
     'pending_list',
@@ -478,6 +478,11 @@ export async function listADAPendings() {
     'items',
     'records',
   ]);
+
+  return {
+    items,
+    meta: data?.meta || data?.data?.meta || {},
+  };
 }
 
 export async function listADAApproved() {
