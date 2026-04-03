@@ -44,8 +44,16 @@ export function AuthProvider({ children }) {
     const stored = sessionStorage.getItem('portalUser');
     if (stored) {
       const parsed = JSON.parse(stored);
-      sessionStorage.removeItem('portalUser');
-      setUser(null);
+      if (!parsed.token_expires_at || Date.now() < parsed.token_expires_at || parsed.refresh_token) {
+        setAuthTokens({
+          accessToken: parsed.access_token || null,
+          refreshToken: parsed.refresh_token || null,
+        });
+        setUser(parsed);
+      } else {
+        clearAuthTokens();
+        sessionStorage.removeItem('portalUser');
+      }
     }
     setLoading(false);
   }, []);
@@ -119,6 +127,8 @@ export function AuthProvider({ children }) {
       name,
       role,
       working_zone,
+      access_token,
+      refresh_token,
       token_type: 'Bearer',
       token_expires_at,
     };

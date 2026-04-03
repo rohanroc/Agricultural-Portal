@@ -150,15 +150,27 @@ export function clearAuthTokens() {
 }
 
 export function getAccessToken() {
-  return memoryAccessToken;
+  return getToken();
 }
 
 function getToken() {
-  return memoryAccessToken;
+  if (memoryAccessToken) return memoryAccessToken;
+  try {
+    const stored = sessionStorage.getItem('portalUser');
+    return stored ? JSON.parse(stored)?.access_token || null : null;
+  } catch {
+    return null;
+  }
 }
 
 function getRefreshToken() {
-  return memoryRefreshToken;
+  if (memoryRefreshToken) return memoryRefreshToken;
+  try {
+    const stored = sessionStorage.getItem('portalUser');
+    return stored ? JSON.parse(stored)?.refresh_token || null : null;
+  } catch {
+    return null;
+  }
 }
 
 function storeUpdatedToken(accessToken, refreshToken, tokenExpiresAt = null) {
@@ -168,6 +180,8 @@ function storeUpdatedToken(accessToken, refreshToken, tokenExpiresAt = null) {
   if (!stored) return;
 
   const user = JSON.parse(stored);
+  if (accessToken) user.access_token = accessToken;
+  if (refreshToken) user.refresh_token = refreshToken;
   user.token_expires_at = tokenExpiresAt;
 
   sessionStorage.setItem('portalUser', JSON.stringify(user));
