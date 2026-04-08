@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { createAgent, fetchMemberSubRoles } from "../../api/client";
 import { useNotification } from "../../context/NotificationContext";
 import { useAuth } from "../../context/AuthContext";
+import CyanSpinner from "../../components/CyanSpinner";
 
 export default function NewMember() {
     const { notifySuccess, notifyError } = useNotification();
@@ -232,13 +233,13 @@ export default function NewMember() {
                 </h2>
 
                 {subRolesLoading ? (
-                    <div className="border border-gray-200 p-6 text-center text-gray-500">
-                        Loading form options...
+                    <div className="border border-gray-200 p-6 flex justify-center">
+                        <CyanSpinner label="Loading form options..." />
                     </div>
                 ) : (
                     <div className="border border-gray-200 p-6">
                         <form onSubmit={handleSubmit}>
-                            <div className="grid grid-cols-4 gap-4 mb-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                                 <Field label="Email *" error={errors.email}>
                                     <input
                                         type="email"
@@ -280,7 +281,7 @@ export default function NewMember() {
                                 </Field>
                             </div>
 
-                            <div className="grid grid-cols-4 gap-4 mb-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                                 <Field label="Role *" error={errors.role_id}>
                                     {availableRoles.length <= 1 ? (
                                         <input
@@ -340,7 +341,7 @@ export default function NewMember() {
                                 </Field>
                             </div>
 
-                            <div className={`grid grid-cols-${showBlockSection ? (availableGPs.length > 0 ? 3 : 2) : 1} gap-4 mb-6`}>
+                            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${showBlockSection ? (availableGPs.length > 0 ? 3 : 2) : 1} gap-4 mb-6`}>
                                 <Field label="District *" error={errors.district_id}>
                                     <select
                                         name="district_id"
