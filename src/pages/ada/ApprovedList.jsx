@@ -275,12 +275,12 @@ export default function ADAApprovedApplicantList() {
 
 function SearchInput({ label, value, onChange, narrow = false }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 w-full sm:w-auto">
       <label className="text-xs text-gray-600">{label}</label>
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`field-input !rounded-xl !px-3 !py-2 text-sm ${narrow ? 'w-40' : 'w-52'}`}
+        className={`field-input !rounded-xl !px-3 !py-2 text-sm max-w-full ${narrow ? 'w-full sm:w-40' : 'w-full sm:w-52'}`}
       />
     </div>
   );
