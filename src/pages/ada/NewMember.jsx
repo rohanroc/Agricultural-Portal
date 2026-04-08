@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { createAgent, fetchMemberSubRoles } from "../../api/client";
 import { useNotification } from "../../context/NotificationContext";
 import { useAuth } from "../../context/AuthContext";
+import CyanSpinner from "../../components/CyanSpinner";
 
 export default function NewMember() {
     const { notifySuccess, notifyError } = useNotification();
@@ -232,8 +233,8 @@ export default function NewMember() {
                 </h2>
 
                 {subRolesLoading ? (
-                    <div className="border border-gray-200 p-6 text-center text-gray-500">
-                        Loading form options...
+                    <div className="border border-gray-200 p-6 flex justify-center">
+                        <CyanSpinner label="Loading form options..." />
                     </div>
                 ) : (
                     <div className="border border-gray-200 p-6">

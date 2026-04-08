@@ -10,6 +10,7 @@ import {
   listADARejected,
   listADAReverted,
   normalizeFarmer,
+  downloadMisReport,
 } from '../api/client';
 
 const ROLE_HOME = {
@@ -150,67 +151,26 @@ export default function Header() {
     URL.revokeObjectURL(url);
   };
 
-  const fetchPagedStatusList = async (loader, forcedStatus) => {
-    const firstPage = await loader(1);
-    const firstItems = (firstPage.items || []).map((item) => ({
-      ...normalizeFarmer(item),
-      ...(forcedStatus ? { status: forcedStatus } : {}),
-    }));
-    const totalPages = Math.max(1, firstPage.meta?.total_pages || 1);
-
-    if (totalPages === 1) return firstItems;
-
-    const remaining = await Promise.all(
-      Array.from({ length: totalPages - 1 }, (_, index) => loader(index + 2))
-    );
-
-    const remainingItems = remaining.flatMap((pageData) =>
-      (pageData.items || []).map((item) => ({
-        ...normalizeFarmer(item),
-        ...(forcedStatus ? { status: forcedStatus } : {}),
-      }))
-    );
-
-    return [...firstItems, ...remainingItems];
-  };
-
-  const fetchMisRows = async (type) => {
-    switch (type) {
-      case 'approved':
-        return fetchPagedStatusList(listADAApproved, 'approved');
-      case 'pending':
-        return fetchPagedStatusList(listADAPendings, 'pending');
-      case 'rejected':
-        return fetchPagedStatusList(listADARejected, 'rejected');
-      case 'reverted':
-        return fetchPagedStatusList(listADAReverted, 'reverted');
-      case 'submitted': {
-        const rows = await listFarmers();
-        return rows.map(normalizeFarmer).filter((app) => app.status !== 'deleted');
-      }
-      case 'sent_to_bank': {
-        const rows = await listFarmers();
-        return rows.map(normalizeFarmer).filter((app) => app.status === 'sent_to_bank');
-      }
-      default:
-        return [];
-    }
-  };
-
   const handleMisDownload = async (type) => {
-    const labels = {
-      submitted: 'submitted_list',
-      approved: 'approved_list',
-      rejected: 'rejected_list',
-      pending: 'pending_list',
-      reverted: 'reverted_list',
-      sent_to_bank: 'send_to_bank_list',
+    const apiStatusMap = {
+      submitted: '',
+      approved: 'approved',
+      rejected: 'rejected',
+      pending: 'pending',
+      reverted: 'reverted',
+      sent_to_bank: 'sent_to_bank',
     };
+    const apiStatus = apiStatusMap[type] !== undefined ? apiStatusMap[type] : type;
 
     try {
       setMisDownloading(type);
-      const rows = await fetchMisRows(type);
-      downloadApplicantsCsv(labels[type], rows);
+      const { blob, filename } = await downloadMisReport(apiStatus);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
       notifySuccess('CSV downloaded successfully');
     } catch (error) {
       notifyError(error.message || 'CSV download failed');

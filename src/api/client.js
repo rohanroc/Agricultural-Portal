@@ -649,6 +649,25 @@ export async function downloadADABulkApproveCsvTemplate() {
   return { blob, filename };
 }
 
+export async function downloadMisReport(status) {
+  const res = await fetchWithAuthRetry(`/v1/mis_reports/farmers.csv?status=${encodeURIComponent(status || '')}`, {}, true);
+
+  if (!res.ok) {
+    const text = await res.text();
+    let json = {};
+    try { json = JSON.parse(text); } catch {}
+    throw new Error(extractError(json, `HTTP ${res.status}`));
+  }
+
+  const blob = await res.blob();
+  const filename = extractFilenameFromDisposition(
+    res.headers.get('content-disposition'),
+    `mis_report_${status || 'all'}.csv`
+  );
+
+  return { blob, filename };
+}
+
 export async function snoBulkApprove() {
   const res = await fetchWithAuthRetry('/v1/ada_pendings/sno_bulk_approve', {
     method: 'POST',
